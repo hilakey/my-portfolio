@@ -12,17 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+// When selected by the user the button will generate a random link to watch any of the animes listed in the array
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+function randomAnime(){
+    const animeList = ["https://www.crunchyroll.com/jojos-bizarre-adventure", "https://www.crunchyroll.com/yu-gi-oh-zexal", "https://www.crunchyroll.com/toradora"
+    , "https://www.crunchyroll.com/fruits-basket", "https://www.crunchyroll.com/dragon-ball-super", "https://www.crunchyroll.com/my-hero-academia", "https://www.crunchyroll.com/sword-art-online", "https://www.netflix.com/title/80241960"];
+
+    const animePick = animeList[Math.floor(Math.random() * animeList.length)];
+    window.open(animePick);
+
+
+
 }
+
+
+
+
+
+
