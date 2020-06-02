@@ -15,6 +15,16 @@
 
 // When selected by the user the button will generate a random link to watch any of the animes listed in the array
 
+
+
+
+
+function getDataResponseUsingArrowFunctions(){
+  fetch('/data').then(response => response.text()).then((greet) => {
+    document.getElementById('greeting-container').innerText = greet;
+  });
+}
+
 function randomAnime(){
   const animeList = ["https://www.crunchyroll.com/jojos-bizarre-adventure", "https://www.crunchyroll.com/yu-gi-oh-zexal", "https://www.crunchyroll.com/toradora"
     , "https://www.crunchyroll.com/fruits-basket", "https://www.crunchyroll.com/dragon-ball-super", "https://www.crunchyroll.com/my-hero-academia", "https://www.crunchyroll.com/sword-art-online", "https://www.netflix.com/title/80241960"];
