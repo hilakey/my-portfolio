@@ -12,15 +12,36 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+function getDataResponseUsingArrowFunctions(){
+  fetch('/data').then(response => response.json()).then((greet) => {
+    console.log(greet[0]);
+    console.log(greet[1]);
+    console.log(greet[2]);
+
+    const greetingsList = document.getElementById('greeting-container');
+    greetingsList.innerHTML = '';
+    greetingsList.appendChild(
+        createListElement(greet[0]));
+    greetingsList.appendChild(
+        createListElement(greet[1]));
+    greetingsList.appendChild(
+        createListElement(greet[2]));
+  });
+}
 
 // When selected by the user the button will generate a random link to watch any of the animes listed in the array
-
 function randomAnime(){
   const animeList = ["https://www.crunchyroll.com/jojos-bizarre-adventure", "https://www.crunchyroll.com/yu-gi-oh-zexal", "https://www.crunchyroll.com/toradora"
     , "https://www.crunchyroll.com/fruits-basket", "https://www.crunchyroll.com/dragon-ball-super", "https://www.crunchyroll.com/my-hero-academia", "https://www.crunchyroll.com/sword-art-online", "https://www.netflix.com/title/80241960"];
 
   const animePick = animeList[Math.floor(Math.random() * animeList.length)];
   window.open(animePick);
+}
+
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
 
 
