@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,15 +31,22 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
 
   private List<String> messages = new ArrayList<String>();
-  
+
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
     //Get input from form.
     String text = getParameter(request, "comments", "");
 
-    //Populate List with the data
+    //Populate list with data.
     messages.add(text);
-    
+
+    //Create new entity.
+    Entity taskEntity = new Entity("Comments");
+    taskEntity.setProperty("messages", text);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(taskEntity);
+
     // Respond with the result.
     response.setContentType("text/html;");
     response.getWriter().println(messages);
