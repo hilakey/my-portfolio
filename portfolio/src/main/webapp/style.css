@@ -1,35 +1,120 @@
-#content {
+#Git-button{
+  color: darkslategrey;
+  font-size: 20px;
+  width: 100px;
+  height: 40px;
+  padding-top: 2px;
+  float: left;
+  margin-right: 5px;
+}
+
+#greeting-container{
+  margin-left:10px;
+  font-size: 20px;
+  width: 200px;
+  height: 20px;
+}
+
+#Interest-button{
+  color: darkslategrey;
+  font-size: 20px;
+  width: 100px;
+  height: 40px;
+  padding-top: 2px;
+  float: left;
+  margin-right: 5px;
+}
+
+#Home-button{
+  color: darkslategrey;
+  font-size: 20px;
+  width: 100px;
+  height: 40px;
+  padding-top: 2px;
+  float: left;
+  margin-right: 5px;
+  margin-left:10px;
+}
+
+#Introduction{
+  margin-top: 100px;
+  display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 1300px;
-}
-
-#greeting-container {
-  margin-top: 20px;
-}
-
-p{
-  font-family:Arial, Helvetica, sans-serif;
-  color: black;
-  font-weight: normal;
 }
 
 h1{
-  color: white;
-  background-color: pink;
-  border-width: 4px;
-  border-color: lightpink;
-  border-style: solid;
+  color: darkslategrey;
+  font-size: 60px;
+  text-align: center;
+  margin: 0;
 }
 
 h2{
-  color: pink;
-  background-color: plum;
-  border-color: plum;
-  border-width: 4px; 
+  color: darkslategrey;
+  font-size: 50px;
+  text-align: center;
+  height: 50px;
+  background-color: mediumturquoise;
+  margin-bottom: 15px; 
 }
 
-
 body{
-  background-color: white;
+  font-family: 'Exo 2', sans-serif;
+}
+
+a:link{
+  color:darkslategrey;
+}
+
+a:visited{
+  color:darkslategrey;
+}
+
+.center{
+  margin-top: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p{
+  display: block;
+  text-align: center;
+  font-size: 30px;
+  margin-left: 300px;
+  margin-right: 300px;
+}
+
+#bottom-border{
+  content: " ";
+  border-color: lavender;
+  border-bottom: 1px;
+  border-style: solid;
+  margin-top: 25px;
+}
+
+#current-tab{
+  border-color: grey;
+  border-bottom: .5px;
+  border-style: solid;
+  background: grey;
+  width: 90px;
+}
+
+div{
+  text-align: center;
+}
+
+ul{
+  display: table;
+  margin: 0 auto;
+  font-size: 30px;
+}
+
+li{
+    text-align: left;
+}
+img{
+    margin-left: 50px;
 }
