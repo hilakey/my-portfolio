@@ -4,64 +4,68 @@
     <meta charset="UTF-8">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@200&family=Permanent+Marker&display=swap" rel="stylesheet">
     <script src="script.js"></script>
-
   </head>
-  
+
   <body>
     <div id="content">
-    
-      <h1> Millennia Perez </h1>
-        <a href="images/me.JPG"><img src="images/me.JPG" width="200" height="210" alt="Image of me"></a>
+      <h1> Millennia</h1>
+      <div id="Home-button"><strong>HOME</strong></div>
+      <div id="Git-button"><a href="https://github.com/hilakey/" style="text-decoration:none; width:100px; height:40px;"><strong>GIT</strong></a></div>
+      <div id="Interest-button"><a href="myportfoliopage2.html" style="text-decoration:none; width:100px; height:40px;"><strong>INTERESTS</strong></a></div>
 
-      <div id="content">
-        <h2>Random Greetings</h2>
-          <p>Click here to see a greeting:</p>
-          <button onclick="getDataResponseUsingArrowFunctions()">Click me to say hi!</button>
-      <div id="greeting-container"></div>
-    </div>    
-      <h2>About Me:</h2>   
-        <p> My name is Millennia and I'm a rising junior currently attending the University of Texas at El Paso <strong>(UTEP)</strong>.<br>
-        I'm a Computer Science major with a minor in Graphic Design, and this summer I'm an intern for the <a href="https://buildyourfuture.withgoogle.com/programs/step/">STEP program</a> at Google!(..virtually, but it's still neat)<br>
-        Sooo, a bit about me is that I've lived in El Paso, Texas for most of my life. I have a background in art and animation.<br>Video games have been with me through it all,
-        and because of them I'm interested in working in game development someday. But I want to mess around with UI/UX design as I'm interested in more creative ventures within tech.<br><br>
-        Some of my <a href="myportfoliopage2.html">hobbies</a> include making art, gaming, singing classical music, and learning languages(studying Korean currently).<br>
-        You can also find me on <a href="https://github.com/hilakey/">GitHub</a>, where some of my projects reside &#x1F33C &#x1F33C &#x1F33C<br><br>
+      <section id="bottom-border"></section>
+      <section id="main-current-tab"></section>
+      <div id="greeting-container"><button onclick="getDataResponseUsingArrowFunctions()">Click me to say hi!</button></div> 
+      
+      <form action="/data" method="POST">
+        <p>Enter <em>anything</em>  you want, seriously.</p>
+        <textarea name="comments"> Write anything here!</textarea><br>
+        <input type="submit" value="Submit">
+      </form>
 
-        As something special, here's some of my artwork!</p>
+      <div id="Introduction">  
+        <a href="images/me.JPG"><img src="images/me.JPG" width="400" height="420" alt="Image of me" class="center"></a>
+        <p> My name is Millennia and I'm a rising junior currently attending the University of Texas at El Paso <strong>(UTEP)</strong>.
+            I'm a Computer Science major with a minor in Graphic Design, and this summer I'm an intern for the <a href="https://buildyourfuture.withgoogle.com/programs/step/">STEP program</a> at Google!(..virtually, but it's still neat)
+            Sooo, a bit about me is that I've lived in El Paso, Texas for most of my life. I have a background in art and animation. Video games have been with me through it all,
+            and because of them I'm interested in working in game development someday. But I want to mess around with UI/UX design as I'm interested in more creative ventures within tech.
+            Some of my hobbies include making art, gaming, singing classical music, and learning languages(studying Korean currently).<br>
+            You can also find me on <strong>GitHub</strong>, where some of my projects reside &#x1F33C &#x1F33C &#x1F33C<br><br>
+            As something special, here's some of my artwork!</p>
+          <a href="images/Ka.png"><img src="images/Ka.png" width="300" height="400" class="center" ></a>
+          <a href="images/lp3.jpeg"><img src="images/lp3.jpeg" width="300" height="400" class="center" ></a>
+          <a href="images/marlaina.png"><img src="images/marlaina.png" width="300" height="400" class="center" ></a>
+          <a href="images/qu.JPG"><img src="images/qu.JPG" width="300" height="400" class="center" ></a>  
+      </div>
+      
+       <h2>RANDOM FACTS</h2>
+       <p>So, a couple random facts about me are:</p>
+         <ul>
+            <li> I was in choir for 4 years</li>
+            <li> My pinky on my right hand is broken-but it hasn't negatively affected anything I've done(well...I'll find out when I learn piano).</li>
+            <li> I collect art prints from every art museum in the cities I travel to. My favorite one was the San Diego MOMA!</li>
+            <li> Although I speak spanish, I can't roll my "R's".</li>
+            <li> My first decent animation was about an alien getting pizza at a gas station(yes I have the video). In fact...I'll show you a render of a scene</li>
+              <img src="images/alien.jpeg" width="300" height="200" alt="Animation Screencap" class="thumbnail">
+            <li> Austin,TX and Las Vegas,NV are my favorite cities to visit.</li>
+            <li> And finally...I do not like fish, in fact I'm pretty scared of them so I try to avoid them as much as possible.</li>
+         </ul>
 
-        <div>
-          <a href="images/Ka.png"><img src="images/Ka.png" width="150" height="200" ></a>
-          <a href="images/lp3.jpeg"><img src="images/lp3.jpeg" width="150" height="200" ></a>
-          <a href="images/marlaina.png"><img src="images/marlaina.png" width="150" height="200" ></a>
-          <a href="images/qu.JPG"><img src="images/qu.JPG" width="150" height="200" ></a>
-        </div>    
-       
-       <h2>Random Facts</h2>
-       <p>So, a couple random facts about me are: </p>
-       <ul>
-          <li> I was in choir for 4 years</li>
-          <li> My pinky on my right hand is broken-but it hasn't negatively affected anything I've done(well...I'll find out when I learn piano).</li>
-          <li> I collect art prints from every art museum in the cities I travel to. My favorite one was the San Diego MOMA!</li>
-          <li> Although I speak spanish, I can't roll my "R's".</li>
-          <li> My first decent animation was about an alien getting pizza at a gas station(yes I have the video). In fact...I'll show you a render of a scene</li>
-            <img src="images/alien.jpeg" width="300" height="200" alt="Animation Screencap">
-          <li> Austin,TX and Las Vegas,NV are my favorite cities to visit.</li>
-          <li> And finally...I do not like fish, in fact I'm pretty scared of them so I try to avoid them as much as possible.</li>
-       </ul>
-
-       <h2>Gallery</h2>
+       <h2>GALLERY</h2>
+       <div>
           <p>Here's my gallery of my favorite art pieces from the museums I've visited!</p>
-            <div>
               <img src="images/art1.JPG" width="300" height="400">
               <img src="images/art2.JPG" width="380" height="400">
               <img src="images/art3.JPG" width="300" height="400">
               <img src="images/art4.JPG" width="300" height="400">
 
-          <p> And I have a chihuahua named Sonic</p>
+          <p> And I have a chihuahua named Sonic &#x1F415</p>
             <a href="images/sonic.jpg"><img src="images/sonic.jpg" width="300" height="400"></a>
             <a href="images/sonic2.PNG"><img src="images/sonic2.PNG" width="300" height="400"></a>
         </div>
+      </div>      
     </div>
   </body>
 </html>

@@ -17,15 +17,22 @@ function getDataResponseUsingArrowFunctions(){
     console.log(greet[0]);
     console.log(greet[1]);
     console.log(greet[2]);
-
+    console.log(greet[3]);
+    console.log(greet[4]);
+    
     const greetingsList = document.getElementById('greeting-container');
     greetingsList.innerHTML = '';
+
     greetingsList.appendChild(
-        createListElement(greet[0]));
+      createListElement(greet[0]));
     greetingsList.appendChild(
-        createListElement(greet[1]));
+      createListElement(greet[1]));
     greetingsList.appendChild(
-        createListElement(greet[2]));
+      createListElement(greet[2]));
+    greetingsList.appendChild(
+      createListElement(greet[3]));
+    greetingsList.appendChild(
+      createListElement(greet[4]));
   });
 }
 
