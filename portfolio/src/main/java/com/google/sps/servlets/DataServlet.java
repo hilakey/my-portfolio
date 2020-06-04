@@ -28,14 +28,32 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
 
   private List<String> messages = new ArrayList<String>();
+  
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    //Get input from form.
+    String text = getParameter(request, "comments", "");
+
+    //Populate List with the data
+    messages.add(text);
+    
+    // Respond with the result.
+    response.setContentType("text/html;");
+    response.getWriter().println(messages);
+    response.sendRedirect("index.html");
+  }
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-    // Create arrayList that will contain few hardcoded messages.
-    messages.add("Hello it is sooo nice to see you!");
-    messages.add("How are you doing?");
-    messages.add("What is your name?");
 
     //Convert arraylist data into json
     String json = convertToJsonUsingGson(messages);
@@ -49,5 +67,5 @@ public class DataServlet extends HttpServlet {
     Gson gson = new Gson();
     String json = gson.toJson(messages);
     return json;
-    }
+  }
 }

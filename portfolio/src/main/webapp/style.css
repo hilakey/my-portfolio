@@ -147,6 +147,7 @@ img{
   height: 200px;
   margin: 0 auto;
 }
+
 .thumbnail:hover {
   transform: scale(1.5);
 }
