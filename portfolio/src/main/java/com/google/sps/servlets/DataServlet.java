@@ -38,11 +38,6 @@ public class DataServlet extends HttpServlet {
     //Get input from form.
     String text = request.getParameter("comments");
 
-    //-----------------------------
-    //Populate list with data.
-    //messages.add(text);
-    //-----------------------------
-
     //Create new entity.
     Entity taskEntity = new Entity("Comments");
     taskEntity.setProperty("message", text);
@@ -65,17 +60,25 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String comment_null = request.getParameter("limit");
+    
     Query query = new Query("Comments");
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     List<String> messages = new ArrayList<String>();
+
     for (Entity entity : results.asIterable()) {
       String message = (String) entity.getProperty("message");
+        if(comment_null != null){
+         int comment_num = (Integer.valueOf(request.getParameter("limit")));
+          if(messages.size() == comment_num){
+            break;
+          }
+        }
       messages.add(message);
     }
-
 
     //Convert arraylist data into json
     String json = convertToJsonUsingGson(messages);
