@@ -8,11 +8,23 @@
   margin-right: 5px;
 }
 
-#greeting-container{
+.user_data{
+  margin-right: 10px;
   margin-left:10px;
-  font-size: 20px;
-  width: 200px;
-  height: 20px;
+  display: block;
+  width: 400px;
+  height: 200px;
+  text-align: center;
+  font-size: 30px;
+}
+
+#greetings-container{
+  margin-right: 10px;
+  margin-left:10px;
+  display: block;
+  width: 400px;
+  text-align: left;
+  font-size: 30px;
 }
 
 #Interest-button{
@@ -47,7 +59,6 @@
 }
 
 #Introduction{
-  margin-top: 100px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -82,18 +93,24 @@ a:visited{
 }
 
 .center{
-  margin-top: 100px;
+  margin-top: 200px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
+textarea{
+    font-size: 20px;
+    width: 200px;
+}
+
+
 p{
   display: block;
   text-align: center;
   font-size: 30px;
-  margin-left: 300px;
-  margin-right: 300px;
+  margin-left: 200px;
+  margin-right: 200px;
 }
 
 #bottom-border{
