@@ -14,6 +14,12 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,19 +33,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private List<String> messages = new ArrayList<String>();
-  
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
     //Get input from form.
-    String text = getParameter(request, "comments", "");
+    String text = request.getParameter("comments");
 
-    //Populate List with the data
-    messages.add(text);
-    
+    //Create new entity.
+    Entity taskEntity = new Entity("Comments");
+    taskEntity.setProperty("message", text);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(taskEntity);
+
     // Respond with the result.
-    response.setContentType("text/html;");
-    response.getWriter().println(messages);
     response.sendRedirect("index.html");
   }
 
@@ -54,6 +60,25 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String comment_null = request.getParameter("limit");
+    
+    Query query = new Query("Comments");
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    List<String> messages = new ArrayList<String>();
+
+    for (Entity entity : results.asIterable()) {
+      String message = (String) entity.getProperty("message");
+        if(comment_null != null){
+         int comment_num = (Integer.valueOf(request.getParameter("limit")));
+          if(messages.size() == comment_num){
+            break;
+          }
+        }
+      messages.add(message);
+    }
 
     //Convert arraylist data into json
     String json = convertToJsonUsingGson(messages);

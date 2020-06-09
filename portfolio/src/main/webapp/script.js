@@ -13,27 +13,19 @@
 // limitations under the License.
 
 function getDataResponseUsingArrowFunctions(){
-  fetch('/data').then(response => response.json()).then((greet) => {
-    console.log(greet[0]);
-    console.log(greet[1]);
-    console.log(greet[2]);
-    console.log(greet[3]);
-    console.log(greet[4]);
-    
-    const greetingsList = document.getElementById('greeting-container');
+  var q = document.getElementById('limit');
+  var url = "/data?limit=";
+  fetch(url + q.value).then(response => response.json()).then((greet) => {
+    const greetingsList = document.getElementById('greetings-container');
     greetingsList.innerHTML = '';
 
-    greetingsList.appendChild(
-      createListElement(greet[0]));
-    greetingsList.appendChild(
-      createListElement(greet[1]));
-    greetingsList.appendChild(
-      createListElement(greet[2]));
-    greetingsList.appendChild(
-      createListElement(greet[3]));
-    greetingsList.appendChild(
-      createListElement(greet[4]));
+    //Build the list of all the comments that have been left on the page.
+    for (let key in greet) {
+      console.log(key, greet[key]);
+      greetingsList.appendChild(createListElement(greet[key]));
+    }
   });
+
 }
 
 // When selected by the user the button will generate a random link to watch any of the animes listed in the array
