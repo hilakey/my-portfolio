@@ -23,16 +23,21 @@
         <input type="number" id="limit" name="limit" min="1" max="50">
         <input type="submit" value="View comments">
       </form>
-
+      
+      <section id="User-status">
+        <form action="/status" method="GET">
+          <input type="submit" value="Leave a Comment" style="height:50px; width:150px">
+          </form> 
+      </section> 
+       
       <div class="user_data">
         <form action="/data" method="POST">
           Enter <em>anything</em>  you want, seriously.<br>
           <textarea name="comments" size="width: 150px; height:100px;"> Write anything here!</textarea><br>
-          <input type="submit" value="Submit">
+          <input type="submit" value="Submit"  style="height:35px; width:70px" onchange="getDataResponseUsingArrowFunctions();return false;(this.value)">
         </form>
       </div>
       <div id="greetings-container"></div>
-       
 
       <div id="Introduction">  
         <a href="images/me.JPG"><img src="images/me.JPG" width="400" height="420" alt="Image of me" class="center"></a>

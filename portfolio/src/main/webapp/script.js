@@ -18,7 +18,7 @@ function getDataResponseUsingArrowFunctions(){
   fetch(url + q.value).then(response => response.json()).then((greet) => {
     const greetingsList = document.getElementById('greetings-container');
     greetingsList.innerHTML = '';
-
+    console.log("testing retrieving comments");
     //Build the list of all the comments that have been left on the page.
     for (let key in greet) {
       console.log(key, greet[key]);
@@ -42,6 +42,23 @@ function createListElement(text) {
   liElement.innerText = text;
   return liElement;
 }
+
+function displayCommentsForm() {
+  fetch('/status').then(response => response.json()).then((status) => {
+  //if user is logged in, display comments form
+  //+ what goes inside the '()' should be the response of the servlet
+  if(){
+    console.log("user is signed in");
+    document.getElementById('user_data').style.display='block';
+    }else{
+        //if user is not logged in hide comments form
+      console.log("user is not signed in");
+      document.getElementById('user_data').style.display='none';
+    }
+  });
+}
+
+
 
 
 

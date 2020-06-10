@@ -21,10 +21,10 @@
 #greetings-container{
   margin-right: 10px;
   margin-left:10px;
-  display: block;
   width: 400px;
   text-align: left;
   font-size: 30px;
+  background-color: red;
 }
 
 #Interest-button{
@@ -167,4 +167,13 @@ img{
 
 .thumbnail:hover {
   transform: scale(1.5);
+}
+
+#User-status{
+  background-color: pink;
+  width: 500px;
+  height: 100px;
+  margin:0;
+  font-size: 25px;
+  flex: left;
 }
