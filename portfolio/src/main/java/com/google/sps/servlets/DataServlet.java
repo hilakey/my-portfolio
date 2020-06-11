@@ -20,6 +20,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,18 +37,23 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
+
+    UserService userService = UserServiceFactory.getUserService();
+
     //Get input from form.
     String text = request.getParameter("comments");
+    String email = userService.getCurrentUser().getEmail();
 
     //Create new entity.
     Entity taskEntity = new Entity("Comments");
     taskEntity.setProperty("message", text);
+    taskEntity.setProperty("email", email);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
 
     // Respond with the result.
-    response.sendRedirect("index.html");
+    response.sendRedirect("/status");
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
