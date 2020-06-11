@@ -31,6 +31,7 @@ public class LoginDataServlet extends HttpServlet {
     response.setContentType("text/html");
     UserService userService = UserServiceFactory.getUserService();
     response.getWriter().println("<h2>USER LOGIN STATUS!</h2>");
+    String returnHomeURL = "index.html";
     if (userService.isUserLoggedIn()) {
       String urlToRedirectToAfterUserLogsOut = "/status";
       String userEmail = userService.getCurrentUser().getEmail();
@@ -38,6 +39,10 @@ public class LoginDataServlet extends HttpServlet {
 
       response.getWriter().println("<p>Hello" + userEmail + "!</p>");
       response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
+      response.getWriter().println("<p><a href=\"" + returnHomeURL + "\">Home</a></p>");
+            
+      
+      
 
       //need a way to communicate with JS that this is true, to unhide form(boolean)
       //or maybe use an onclick to trigger event here
@@ -49,6 +54,7 @@ public class LoginDataServlet extends HttpServlet {
 
       response.getWriter().println("<p>Hello stranger.</p>");
       response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
+      response.getWriter().println("<p><a href=\"" + returnHomeURL + "\">Home</a></p>");
     }
   }
 }
