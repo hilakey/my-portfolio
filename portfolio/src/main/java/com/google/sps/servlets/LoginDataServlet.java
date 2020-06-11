@@ -33,12 +33,14 @@ public class LoginDataServlet extends HttpServlet {
     response.getWriter().println("<h2>USER LOGIN STATUS!</h2>");
     if (userService.isUserLoggedIn()) {
       String urlToRedirectToAfterUserLogsOut = "/status";
+      String userEmail = userService.getCurrentUser().getEmail();
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-      response.getWriter().println("<p>Hello user!</p>");
+      response.getWriter().println("<p>Hello" + userEmail + "!</p>");
       response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
 
       //need a way to communicate with JS that this is true, to unhide form(boolean)
+      //or maybe use an onclick to trigger event here
       //maybe json(true/false) to evaluate
       //<return this value to JS>
     } else {

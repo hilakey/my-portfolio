@@ -44,18 +44,21 @@ function createListElement(text) {
 }
 
 function displayCommentsForm() {
-  fetch('/status').then(response => response.json()).then((status) => {
+  
   //if user is logged in, display comments form
-  //+ what goes inside the '()' should be the response of the servlet
-  if(){
+  //+ what goes inside the '()' should be the response of the servlet 
     console.log("user is signed in");
     document.getElementById('user_data').style.display='block';
-    }else{
+    //else{
         //if user is not logged in hide comments form
-      console.log("user is not signed in");
-      document.getElementById('user_data').style.display='none';
-    }
-  });
+      //console.log("user is not signed in");
+     // document.getElementById('user_data').style.display='none';
+    //}
+}
+
+function hideCommentsForm(){
+  console.log("user is not signed in");
+  document.getElementById('user_data').style.display='none';
 }
 
 
