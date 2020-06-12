@@ -18,14 +18,14 @@ function getDataResponseUsingArrowFunctions(){
   fetch(url + q.value).then(response => response.json()).then((greet) => {
     const greetingsList = document.getElementById('greetings-container');
     greetingsList.innerHTML = '';
-    console.log("testing retrieving comments");
+    console.log(greet);
+    
     //Build the list of all the comments that have been left on the page.
     for (let key in greet) {
       console.log(key, greet[key]);
-      greetingsList.appendChild(createListElement(greet[key]));
+      greetingsList.appendChild(createListElement(greet[key].email, greet[key].comment));
     }
   });
-
 }
 
 // When selected by the user the button will generate a random link to watch any of the animes listed in the array
@@ -37,8 +37,8 @@ function randomAnime(){
   window.open(animePick);
 }
 
-function createListElement(text) {
+function createListElement(text1, text2) {
   const liElement = document.createElement('li');
-  liElement.innerText = text;
+  liElement.innerText =  text1  + " commented: " + text2;
   return liElement;
 }
