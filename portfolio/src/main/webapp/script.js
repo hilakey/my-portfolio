@@ -29,12 +29,11 @@ function drawChart() {
 
   const options = {
     'title': 'Favorite Foods',
-    'width':700,
-    'height':600
+    pieHole: 0.4,
   };
 
   const chart = new google.visualization.PieChart(
-      document.getElementById('chart-container'));
+      document.getElementById('donutchart'));
   chart.draw(data, options);
 }
 
