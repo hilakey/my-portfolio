@@ -12,6 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+/** Creates a chart and adds it to the page. */
+function drawChart() {
+  const data = new google.visualization.DataTable();
+  data.addColumn('string', 'Food');
+  data.addColumn('number', 'Count');
+        data.addRows([
+          ['Chicken Wings', 10],
+          ['Enchiladas Verdes', 15],
+          ['CheeseCake', 12],
+          ['Pasta' , 8]
+        ]);
+
+  const options = {
+    'title': 'Favorite Foods',
+    'width':700,
+    'height':600
+  };
+
+  const chart = new google.visualization.PieChart(
+      document.getElementById('chart-container'));
+  chart.draw(data, options);
+}
+
 function getDataResponseUsingArrowFunctions(){
   var q = document.getElementById('limit');
   var url = "/data?limit=";
@@ -39,6 +65,6 @@ function randomAnime(){
 
 function createListElement(text1, text2) {
   const liElement = document.createElement('li');
-  liElement.innerText =  text1  + " commented: " + text2;
+  liElement.innerText = text1 + " commented: " + text2;
   return liElement;
 }
