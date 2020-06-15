@@ -30,7 +30,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import usercomments.Comments;
+import usercomments.Comment;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -75,12 +75,12 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    List<Comments> messages = new ArrayList<Comments>();
+    List<Comment> messages = new ArrayList<Comment>();
 
     for (Entity entity : results.asIterable()) {
       String message = (String) entity.getProperty("message");
       String email = (String) entity.getProperty("email");
-      Comments userInfo =  new Comments(message, email);
+      Comment userInfo =  new Comment(message, email);
 
         if(comment_null != null){
          int comment_num = (Integer.valueOf(request.getParameter("limit")));
@@ -99,7 +99,7 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
-  private String convertToJsonUsingGson(List<Comments> messages) {
+  private String convertToJsonUsingGson(List<Comment> messages) {
     Gson gson = new Gson();
     String json = gson.toJson(messages);
     return json;

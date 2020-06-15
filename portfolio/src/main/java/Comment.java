@@ -1,12 +1,12 @@
 package usercomments;
 
-public class Comments{
+public class Comment{
   private String comment;
   private String email;
   private String displayName;
 
   //Constructor
-  public Comments(String comment, String email){
+  public Comment(String comment, String email){
       this.comment = comment;
       this.email = email;
   }
@@ -23,12 +23,4 @@ public class Comments{
   public String getDisplayName(){
       return this.displayName;
   }
-
-
-
-
-
-
-
-
 }

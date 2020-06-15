@@ -43,7 +43,6 @@ public class LoginDataServlet extends HttpServlet {
       response.getWriter().println("<p><a id=\"hi\"href=\"" + returnHomeURL + "\">Home</a></p>");
       response.getWriter().println("</div>");
 
-
       //If user is logged in display the comments form
       response.getWriter().println("<div class=\"user_data\" style=\"display: block;text-align: center;font-size: 30px;\">");
       response.getWriter().println("<form action=\"/data\" method=\"POST\">");
@@ -62,7 +61,6 @@ public class LoginDataServlet extends HttpServlet {
       response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
       response.getWriter().println("<p><a href=\"" + returnHomeURL + "\">Home</a></p>");
       response.getWriter().println("</div>");
-
     }
   }
 }

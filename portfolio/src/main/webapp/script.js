@@ -12,29 +12,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-google.charts.load('current', {'packages':['corechart']});
+google.charts.load('current', {'packages':['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawChart);
 
 /** Creates a chart and adds it to the page. */
 function drawChart() {
+fetch('/videogame-data').then(response => response.json()).then((videoGameData) => {
   const data = new google.visualization.DataTable();
-  data.addColumn('string', 'Food');
-  data.addColumn('number', 'Count');
-        data.addRows([
-          ['Chicken Wings', 10],
-          ['Enchiladas Verdes', 15],
-          ['CheeseCake', 12],
-          ['Pasta' , 8]
-        ]);
+  data.addColumn('string', 'Game');
+  data.addColumn('number', 'Userplay');
+  Object.keys(videoGameData).forEach((game) => {
+      data.addRow([game, videoGameData[game]]);
+    });
 
   const options = {
-    'title': 'Favorite Foods',
-    pieHole: 0.4,
+    'title': 'Most popular video games in the U.S. 2019',
+    vAxis: {
+          'title': 'Games',
+           },
+    hAxis: {
+        'format':'#%',
+         minValue: 0
+    }
   };
 
-  const chart = new google.visualization.PieChart(
-      document.getElementById('donutchart'));
+  const chart = new google.visualization.BarChart(document.getElementById('barchart_material'));
   chart.draw(data, options);
+  });   
 }
 
 function getDataResponseUsingArrowFunctions(){
