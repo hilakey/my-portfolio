@@ -8,21 +8,10 @@
   margin-right: 5px;
 }
 
-.user_data{
-  margin-right: 10px;
-  margin-left:10px;
-  display: block;
-  width: 400px;
-  height: 200px;
-  text-align: center;
-  font-size: 30px;
-}
-
 #greetings-container{
   margin-right: 10px;
   margin-left:10px;
-  display: block;
-  width: 400px;
+  width: 700px;
   text-align: left;
   font-size: 30px;
 }
@@ -167,4 +156,11 @@ img{
 
 .thumbnail:hover {
   transform: scale(1.5);
+}
+
+#User-status{
+  font-size: 25px;
+  display: block;
+  flex:left;
+  margin-top: 10px;
 }

@@ -5,6 +5,7 @@
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@200&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="script.js"></script>
   </head>
 
@@ -23,16 +24,14 @@
         <input type="number" id="limit" name="limit" min="1" max="50">
         <input type="submit" value="View comments">
       </form>
-
-      <div class="user_data">
-        <form action="/data" method="POST">
-          Enter <em>anything</em>  you want, seriously.<br>
-          <textarea name="comments" size="width: 150px; height:100px;"> Write anything here!</textarea><br>
-          <input type="submit" value="Submit">
-        </form>
-      </div>
-      <div id="greetings-container"></div>
+      
+      <section id="User-status">
+        <form action="/status" method="GET">
+          <input type="submit" value="Leave a Comment" style="height:50px; width:150px">
+          </form> 
+      </section> 
        
+      <div id="greetings-container"></div>
 
       <div id="Introduction">  
         <a href="images/me.JPG"><img src="images/me.JPG" width="400" height="420" alt="Image of me" class="center"></a>

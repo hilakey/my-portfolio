@@ -20,6 +20,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import usercomments.Comment;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -35,18 +38,23 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
+
+    UserService userService = UserServiceFactory.getUserService();
+
     //Get input from form.
     String text = request.getParameter("comments");
+    String email = userService.getCurrentUser().getEmail();
 
     //Create new entity.
     Entity taskEntity = new Entity("Comments");
     taskEntity.setProperty("message", text);
+    taskEntity.setProperty("email", email);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
 
     // Respond with the result.
-    response.sendRedirect("index.html");
+    response.sendRedirect("/status");
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
@@ -67,17 +75,20 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    List<String> messages = new ArrayList<String>();
+    List<Comment> messages = new ArrayList<Comment>();
 
     for (Entity entity : results.asIterable()) {
       String message = (String) entity.getProperty("message");
+      String email = (String) entity.getProperty("email");
+      Comment userInfo =  new Comment(message, email);
+
         if(comment_null != null){
          int comment_num = (Integer.valueOf(request.getParameter("limit")));
           if(messages.size() == comment_num){
             break;
           }
         }
-      messages.add(message);
+      messages.add(userInfo);
     }
 
     //Convert arraylist data into json
@@ -88,9 +99,10 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
-  private String convertToJsonUsingGson(List<String> messages) {
+  private String convertToJsonUsingGson(List<Comment> messages) {
     Gson gson = new Gson();
     String json = gson.toJson(messages);
     return json;
   }
 }
+
