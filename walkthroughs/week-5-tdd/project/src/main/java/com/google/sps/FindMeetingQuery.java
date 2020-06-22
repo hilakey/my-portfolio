@@ -25,10 +25,13 @@ public final class FindMeetingQuery {
     //throw new UnsupportedOperationException("TODO: Implement this method.");
     Collection<TimeRange> freeMeetingTimes = new ArrayList<TimeRange>();
     List<TimeRange> unavailableTimes = new ArrayList<TimeRange>();
+    List<TimeRange> finalUnavailableTimes = new ArrayList<TimeRange>();
     int meetingDuration = (int) request.getDuration();
     String person;
     int eventStart;
     int eventDuration;
+    int eventEnd;
+    int numPersons = 0;
 
     //-----------Base Cases-------------------//
 
@@ -43,13 +46,6 @@ public final class FindMeetingQuery {
       return freeMeetingTimes;
     }
 
-
-
-
-    //A whole day is 1440 minutes
-    //end of day is 1439 minutes
-    //start of day is 0 minutes
-
    //If there are requested attendees for the meeting request find if there are unavailable times
    if(!request.getAttendees().isEmpty()){
        for(Event hasEvents: events) {
@@ -58,24 +54,22 @@ public final class FindMeetingQuery {
 
                //If the person in the events list matches with the requested attendee, continue to retrieve their event time ranges
                if(request.getAttendees().contains(person)){
+                   numPersons++;
                   System.out.println(person);
                   eventStart = hasEvents.getWhen().start();
                   eventDuration = hasEvents.getWhen().duration();
-                  System.out.println("Event start " + eventStart);
-                  System.out.println("Event end " + hasEvents.getWhen().end());
-                  System.out.println("Event duration " + eventDuration);
-                  System.out.println("=============================================");
 
                   unavailableTimes.add(TimeRange.fromStartDuration(eventStart, eventDuration));
+                }else{
+                    freeMeetingTimes.add(TimeRange.WHOLE_DAY);
+                    return freeMeetingTimes;
                 }
             }
-          
         }
-
-        System.out.println("Before sorting: " + unavailableTimes);
+       
         //Sort the unavailable time ranges
         Collections.sort(unavailableTimes, TimeRange.ORDER_BY_START);
-        System.out.println("After sorting: " + unavailableTimes);
+        
 
         //If there is only one event, then return the available time that is before/after the event
         if(unavailableTimes.size() == 1){
@@ -85,17 +79,47 @@ public final class FindMeetingQuery {
           return freeMeetingTimes;
         }else{
             //loop through the unavailable times and check if they overlap with one another
+            for(int i = 0; i < unavailableTimes.size()-1; i++){
+                if(unavailableTimes.get(i+1).overlaps(unavailableTimes.get(i))){
+                    if(unavailableTimes.get(i).duration() > unavailableTimes.get(i+1).duration()){
+                        eventStart = unavailableTimes.get(i).start();
+                        eventDuration = unavailableTimes.get(i).start() + (unavailableTimes.get(i+1).start() - unavailableTimes.get(i).start()) +  unavailableTimes.get(i+1).duration() + (unavailableTimes.get(i).end() - unavailableTimes.get(i+1).end());
+                        
+                        finalUnavailableTimes.add(TimeRange.fromStartDuration(eventStart, eventDuration));
+                    }
+                }else{
+                    //if no overlapping then create the new time ranges
+                     finalUnavailableTimes.add(TimeRange.fromStartDuration(unavailableTimes.get(i).start(), unavailableTimes.get(i).duration() ));
+                     finalUnavailableTimes.add(TimeRange.fromStartDuration(unavailableTimes.get(i+1).start(), unavailableTimes.get(i+1).duration()));
+                }
+            }
 
-
-
-
-
-
-        }
-        
+            //Sort the updated unavailable time ranges
+           
+            Collections.sort(finalUnavailableTimes, TimeRange.ORDER_BY_START);
+            
+            int newStart = 0;
+            for(int i = 0; i < finalUnavailableTimes.size(); i++){
+                if(i == 0){
+                    freeMeetingTimes.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, finalUnavailableTimes.get(i).start(), false));
+                    newStart = finalUnavailableTimes.get(i).end();
+                    continue;
+                }
+                if(i == numPersons-1){
+                    //Adjusting time availability during the middle of the day
+                    freeMeetingTimes.add(TimeRange.fromStartEnd(newStart,finalUnavailableTimes.get(i).start() , false));
+                    newStart = finalUnavailableTimes.get(i).end();
+                
+                    //Adjusting time availability at the end of the day
+                    freeMeetingTimes.add(TimeRange.fromStartEnd(finalUnavailableTimes.get(i).end(), TimeRange.END_OF_DAY, true));
+                    break;
+                }
+                freeMeetingTimes.add(TimeRange.fromStartEnd(newStart,finalUnavailableTimes.get(i).start() , false));
+                newStart = finalUnavailableTimes.get(i).end();
+            }
+            return freeMeetingTimes;
+        }    
     }
-
     return freeMeetingTimes;
-
   }
 }
